@@ -1,0 +1,12 @@
+image:  gitlab/dind:latest
+
+before_script:
+  - docker info
+
+build_image:
+  script:
+    - docker build -t docker.modhub.io:5000/tomjrob/docker-ci-terraform:latest .
+    - docker login -u modhubdev -p il0vetea -e tomjrob@modhub.io docker.modhub.io:5000
+    - docker push docker.modhub.io:5000/tomjrob/docker-ci-terraform:latest
+  tags:
+    - docker
